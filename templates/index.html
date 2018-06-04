@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flask Desktop Application</title>
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+<form action="/" method="post">
+    {{ form.hidden_tag() }}
+
+    {% if form.checkbox1.data == True %}
+    <span class="label label-success">label1</span>
+    {% else %}
+    <span class="label label-default">label1</span>
+    {% endif %}
+
+    {{ form.checkbox1() }} {{ form.checkbox1.label }}
+    <br>
+    {% if form.checkbox2.data == True %}
+    <span class="label label-success">label2</span>
+    {% else %}
+    <span class="label label-default">label2</span>
+    {% endif %}
+
+    {{ form.checkbox2() }} {{ form.checkbox2.label }}
+    <br>
+    <button type="submit" class="btn btn-primary">PushButton </button>
+</form>
+
+</body>
+
+</html>
