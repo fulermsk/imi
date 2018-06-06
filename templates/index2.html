@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flask Desktop Application</title>
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<form action="/" method="post">
+    <span class="label label-success" id="label1"></span>
+    <span class="label label-success" id="label2"></span>
+    <span class="label label-success" id="label3"></span>
+    <span class="label label-success" id="label4"></span>
+    <span class="label label-success" id="label5"></span>
+    <span class="label label-success" id="label6"></span>
+    <span class="label label-success" id="label7"></span>
+</form>
+
+</body>
+
+<script>
+var data = {{ data }}
+for (i = 0; i < data.length; i++) {
+    var element_id = "label" + (i + 1)
+    console.log(element_id)
+    if (data[i] > 0){
+        document.getElementById(element_id).className = "label label-success";
+    }
+    else {
+        document.getElementById(element_id).className = "label label-default";
+    }
+
+    document.getElementById(element_id).innerHTML = data[i];
+}
+</script>
+
+</html>
