@@ -10,30 +10,34 @@
 <body>
 <form action="/" method="post">
     <div class="js_labels"></div>
-    <button type="submit" class="js_submit btn btn-primary">Отправить</button>
 </form>
 </body>
 
 <script>
-
-var data = Array.from({length: 7}, () => Math.floor((Math.random() - 0.5) * 100));
+var data = []
 var $labels = $('.js_labels');
-var $submit = $('.js_submit');
 
-data.forEach(function(item, i){
-    var $el = $('<span>').attr("id", "label" + (i + 1)).html(item)
-    $el.attr("class", (item > 0) ? "label label-success" : "label label-default")
-    $labels.append($el)
-});
+function renderLabels(data) {
+    $labels.html("");
+    Object.keys(data).forEach(function(item, i){
+        if (item.slice(0, 4) !== "auu_") return
+        var value = data[item]
+        var $el = $('<span>').attr("id", "label" + (i + 1)).html(value)
+        $el.attr("class", (value === 1) ? "label label-success" : "label label-default")
+        $labels.append($el)
+    });
+}
 
-$submit.on('click', function(e) {
-    e.preventDefault();
+function fetchData() {
     $.ajax({
-        method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({data: data}),
-    })
-});
+        url: "/data/",
+        method: "GET",
+        contentType: "application/json"
+    }).done(renderLabels)
+}
+
+fetchData()
+setInterval(fetchData, 5000)
 
 </script>
 
